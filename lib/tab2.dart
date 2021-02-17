@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'bookmarked_users.dart';
 import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
 
-class Tab2 extends StatelessWidget {
+class Tab2 extends StatefulWidget {
+  @override
+  _Tab2State createState() => _Tab2State();
+}
+
+class _Tab2State extends State<Tab2> {
+  Box<BookmarkedData> testBox;
+  @override
+  void initState() {
+    // TODO: implement initState
+    testBox = Hive.box<BookmarkedData>("testBox");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,6 +35,7 @@ class Tab2 extends StatelessWidget {
                 onChanged: (newValue) {
                   if (newValue == false) {
                     userData.remove(userData.users[index]);
+                    testBox.delete(userData);
                   }
                 },
               ),
