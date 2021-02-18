@@ -57,6 +57,8 @@ class _DataListState extends State<DataList> {
                   onChanged: (newValue) {
                     if (newValue == true) {
                       userData.add(userData.allUsers[index]);
+                      final user = Hive.box("testBox");
+                      user.add(userData);
                     }
                     if (newValue == false) {
                       userData.remove(userData.allUsers[index]);
